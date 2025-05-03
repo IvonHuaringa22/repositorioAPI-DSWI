@@ -18,5 +18,7 @@ namespace Proyecto_DSWI_API_GP3.Models
 
         [Required]
         public string TipoUsuario { get; set; } // "Cliente" o "Administrador"
+
+        public ICollection<Cliente> Clientes { get; set; }
     }
 }

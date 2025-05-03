@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Proyecto_DSWI_API_GP3.Data;
 using Proyecto_DSWI_API_GP3.Data.IRepository;
 using Proyecto_DSWI_API_GP3.Data.Repository;
 
@@ -10,9 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("local")));
 
 //Dependencias
 builder.Services.AddScoped<IUsuarios, UsuariosRepository>();
+builder.Services.AddScoped<IEventos, EventosRepository>();
+builder.Services.AddScoped<IZonas, ZonasRepository>();
 
 var app = builder.Build();
 
