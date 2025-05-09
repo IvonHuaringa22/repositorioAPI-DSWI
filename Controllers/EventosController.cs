@@ -4,28 +4,27 @@ using Proyecto_DSWI_API_GP3.Models;
 
 namespace Proyecto_DSWI_API_GP3.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class EventosController : Controller
     {
-        private readonly IEventos _repo;
+        IEventos repo;
 
-        public EventosController(IEventos repo)
+        public EventosController(IEventos repositorio)
         {
-            _repo = repo;
+            repo = repositorio;
         }
 
         [HttpGet]
         public IActionResult Listar()
         {
-            var lista = _repo.Listar();
-            return Ok(lista);
+            return Ok(repo.Listar());
         }
 
         [HttpGet("{id}")]
         public IActionResult Obtener(int id)
         {
-            var evento = _repo.ObtenerPorId(id);
+            var evento = repo.ObtenerPorId(id);
             if (evento == null)
                 return NotFound();
             return Ok(evento);
@@ -34,7 +33,7 @@ namespace Proyecto_DSWI_API_GP3.Controllers
         [HttpPost]
         public IActionResult Registrar([FromBody] Eventos evento)
         {
-            var exito = _repo.Registrar(evento);
+            var exito = repo.Registrar(evento);
             if (exito)
                 return Ok(new { mensaje = "Evento registrado correctamente" });
             return BadRequest(new { mensaje = "Error al registrar el evento" });
@@ -43,7 +42,7 @@ namespace Proyecto_DSWI_API_GP3.Controllers
         [HttpPut]
         public IActionResult Editar([FromBody] Eventos evento)
         {
-            var exito = _repo.Editar(evento);
+            var exito = repo.Editar(evento);
             if (exito)
                 return Ok(new { mensaje = "Evento actualizado correctamente" });
             return BadRequest(new { mensaje = "Error al actualizar el evento" });
@@ -52,7 +51,7 @@ namespace Proyecto_DSWI_API_GP3.Controllers
         [HttpDelete("{id}")]
         public IActionResult Eliminar(int id)
         {
-            var exito = _repo.Eliminar(id);
+            var exito = repo.Eliminar(id);
             if (exito)
                 return Ok(new { mensaje = "Evento eliminado correctamente" });
             return BadRequest(new { mensaje = "Error al eliminar el evento" });
