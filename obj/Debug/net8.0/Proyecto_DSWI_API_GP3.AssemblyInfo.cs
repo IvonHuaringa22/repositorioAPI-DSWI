@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Proyecto_DSWI_API_GP3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e86481192851862e5a39569c322aef2b84e2dbd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b745161b29e884192e058666e52627cfe4cbb4ac")]
 [assembly: System.Reflection.AssemblyProductAttribute("Proyecto_DSWI_API_GP3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Proyecto_DSWI_API_GP3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
