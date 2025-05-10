@@ -6,6 +6,7 @@ namespace Proyecto_DSWI_API_GP3.Data.IRepository
     {
         IEnumerable<Eventos> Listar();
         Eventos ObtenerPorId(int id);
+        IEnumerable<Eventos> BuscarPorNombre(string nombre);
         bool Registrar(Eventos evento);
         bool Editar(Eventos evento);
         bool Eliminar(int id);

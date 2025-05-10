@@ -121,6 +121,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Proyecto_DSWI_API_GP3.Controllers.EventosController",
+    "Method": "BuscarPorNombre",
+    "RelativePath": "api/Eventos/BuscarPorNombre",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nombre",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Proyecto_DSWI_API_GP3.Controllers.UsuariosController",
     "Method": "Listar",
     "RelativePath": "api/Usuarios",

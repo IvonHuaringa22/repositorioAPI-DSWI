@@ -11,6 +11,7 @@ namespace Proyecto_DSWI_API_GP3.Data.Repository
         {
             _config = config;
         }
+
         public IEnumerable<Eventos> Listar()
         {
             List<Eventos> listado = new List<Eventos>();
@@ -19,6 +20,42 @@ namespace Proyecto_DSWI_API_GP3.Data.Repository
                 conexion.Open();
                 SqlCommand command = new SqlCommand("ListarEventos", conexion);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader != null && reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        listado.Add(new Eventos()
+                        {
+                            IdEvento = Convert.ToInt32(reader["IdEvento"]),
+                            NombreEvento = reader["NombreEvento"].ToString(),
+                            TipoEvento = reader["TipoEvento"].ToString(),
+                            Lugar = reader["Lugar"].ToString(),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Hora = TimeSpan.Parse(reader["Hora"].ToString()),
+                            Descripcion = reader["Descripcion"].ToString()
+                        });
+                    }
+                }
+            }
+            return listado;
+        }
+
+        public IEnumerable<Eventos> BuscarPorNombre(string nombre)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                return Listar(); // este ya trae todos los eventos
+            }
+            List<Eventos> listado = new List<Eventos>();
+            using (var conexion = new SqlConnection(_config["ConnectionStrings:local"]))
+            {
+                conexion.Open();
+                SqlCommand command = new SqlCommand("BuscarEventosPorNombre", conexion);
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@NombreEvento", string.IsNullOrEmpty(nombre) ? DBNull.Value : nombre);
+
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader != null && reader.HasRows)
                 {
@@ -80,7 +117,7 @@ namespace Proyecto_DSWI_API_GP3.Data.Repository
             using (var conexion = new SqlConnection(_config["ConnectionStrings:local"]))
             {
                 conexion.Open();
-                SqlCommand command = new SqlCommand("GuardarEvento", conexion);
+                SqlCommand command = new SqlCommand("RegistrarEvento", conexion);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@NombreEvento", eventos.NombreEvento);
                 command.Parameters.AddWithValue("@TipoEvento", eventos.TipoEvento);
