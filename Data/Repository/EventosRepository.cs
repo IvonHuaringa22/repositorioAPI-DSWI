@@ -83,7 +83,7 @@ namespace Proyecto_DSWI_API_GP3.Data.Repository
             using (var conexion = new SqlConnection(_config["ConnectionStrings:local"]))
             {
                 conexion.Open();
-                SqlCommand command = new SqlCommand("ActualizarEvento", conexion);
+                SqlCommand command = new SqlCommand("EditarEvento", conexion);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@IdEvento", eventos.IdEvento);
                 command.Parameters.AddWithValue("@NombreEvento", eventos.NombreEvento);
