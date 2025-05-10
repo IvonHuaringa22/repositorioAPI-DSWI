@@ -2,6 +2,7 @@
 using Proyecto_DSWI_API_GP3.Models;
 using Proyecto_DSWI_API_GP3.Models.DTO;
 using Microsoft.Data.SqlClient;
+using Proyecto_DSWI_API_GP3.Models.DTO.Usuario;
 
 namespace Proyecto_DSWI_API_GP3.Data.Repository
 {
@@ -12,19 +13,24 @@ namespace Proyecto_DSWI_API_GP3.Data.Repository
         {
             _config = config;
         }
-        public bool Actualizar(Usuarios usuarios)
+        public bool Actualizar(ActualizarDTO usuario)
         {
             bool exito = false;
+
+            Usuarios user = ObtenerPorId(usuario.IdUsuario);
+
+            if (user == null) {
+                return exito;
+            }
+
             using (var conexion = new SqlConnection(_config["ConnectionStrings:local"]))
             {
                 conexion.Open();
                 SqlCommand command = new SqlCommand("ActualizarUsuario", conexion);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@IdUsuario", usuarios.IdUsuario);
-                command.Parameters.AddWithValue("@Nombre", usuarios.Nombre);
-                command.Parameters.AddWithValue("@Correo", usuarios.Correo);
-                command.Parameters.AddWithValue("@Contraseña", usuarios.Contraseña);
-                command.Parameters.AddWithValue("@TipoUsuario", usuarios.TipoUsuario);
+                command.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+                command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@TipoUsuario", usuario.TipoUsuario);
                 exito = command.ExecuteNonQuery() > 0;
             }
             return exito;
@@ -98,7 +104,7 @@ namespace Proyecto_DSWI_API_GP3.Data.Repository
             return usuarios;
         }
 
-        public bool Registrar(UsuariosDTO usuarios)
+        public bool Registrar(RegistrarDTO usuarios)
         {
             bool exito = false;
 

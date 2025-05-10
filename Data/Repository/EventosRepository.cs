@@ -45,7 +45,7 @@ namespace Proyecto_DSWI_API_GP3.Data.Repository
         {
             if (string.IsNullOrWhiteSpace(nombre))
             {
-                return Listar(); // este ya trae todos los eventos
+                return Listar(); 
             }
             List<Eventos> listado = new List<Eventos>();
             using (var conexion = new SqlConnection(_config["ConnectionStrings:local"]))

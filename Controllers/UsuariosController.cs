@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Proyecto_DSWI_API_GP3.Models;
 using Proyecto_DSWI_API_GP3.Models.DTO;
 using Microsoft.AspNetCore.Http;
+using Proyecto_DSWI_API_GP3.Models.DTO.Usuario;
 
 namespace Proyecto_DSWI_API_GP3.Controllers
 {
@@ -21,7 +22,7 @@ namespace Proyecto_DSWI_API_GP3.Controllers
             return Ok(repo.Listar());
         }
         [HttpPost]
-        public IActionResult Registrar(UsuariosDTO usuarios)
+        public IActionResult Registrar(RegistrarDTO usuarios)
         {
             return Ok(repo.Registrar(usuarios));
         }
@@ -29,18 +30,25 @@ namespace Proyecto_DSWI_API_GP3.Controllers
         [HttpGet("{id}")]
         public IActionResult ObtenerPorId(int id)
         {
+            var usuario = repo.ObtenerPorId(id);
+            if (usuario == null)
+            {
+                return NotFound(new { mensaje = "Usuario no encontrado" });
+            }
             return Ok(repo.ObtenerPorId(id));
         }
 
         [HttpPut]
-        public IActionResult Actualizar(Usuarios usuarios)
+        public IActionResult Actualizar(ActualizarDTO usuarios)
         {
             return Ok(repo.Actualizar(usuarios));
         }
+
         [HttpDelete("{id}")]
         public IActionResult Eliminar(int id)
         {
             return Ok(repo.Eliminar(id));
         }
+
     }
 }

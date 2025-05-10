@@ -30,7 +30,7 @@ namespace Proyecto_DSWI_API_GP3.Controllers
             return Ok(evento);
         }
 
-        [HttpGet("BuscarPorNombre")]
+        [HttpGet("Buscar")]
         public IActionResult BuscarPorNombre(string nombre)
         {
             var evento = repo.BuscarPorNombre(nombre);

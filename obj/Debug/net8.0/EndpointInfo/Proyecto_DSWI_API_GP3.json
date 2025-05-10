@@ -201,7 +201,7 @@
         }
       }
     },
-    "/api/Eventos/BuscarPorNombre": {
+    "/api/Eventos/Buscar": {
       "get": {
         "tags": [
           "Eventos"
@@ -241,17 +241,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UsuariosDTO"
+                "$ref": "#/components/schemas/RegistrarDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UsuariosDTO"
+                "$ref": "#/components/schemas/RegistrarDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UsuariosDTO"
+                "$ref": "#/components/schemas/RegistrarDTO"
               }
             }
           }
@@ -270,17 +270,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Usuarios"
+                "$ref": "#/components/schemas/ActualizarDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Usuarios"
+                "$ref": "#/components/schemas/ActualizarDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Usuarios"
+                "$ref": "#/components/schemas/ActualizarDTO"
               }
             }
           }
@@ -465,6 +465,24 @@
   },
   "components": {
     "schemas": {
+      "ActualizarDTO": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoUsuario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Cliente": {
         "type": "object",
         "properties": {
@@ -586,6 +604,28 @@
         },
         "additionalProperties": false
       },
+      "RegistrarDTO": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "contraseña": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoUsuario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Usuarios": {
         "required": [
           "contraseña",
@@ -620,32 +660,6 @@
             "items": {
               "$ref": "#/components/schemas/Cliente"
             },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UsuariosDTO": {
-        "type": "object",
-        "properties": {
-          "idUsuario": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "correo": {
-            "type": "string",
-            "nullable": true
-          },
-          "contraseña": {
-            "type": "string",
-            "nullable": true
-          },
-          "tipoUsuario": {
-            "type": "string",
             "nullable": true
           }
         },
